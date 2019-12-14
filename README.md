@@ -1,7 +1,7 @@
 # Vertex Queue Area Generation for Gradient Noise
 Proof of concept. Generates gradient noise over a specified area (using a vertex queue and not a "range"), with the goal of increasing performance.
 
-The first idea I thought of, was to simply iterate over skewed lattice coordinates. But that wouldn't have been very good for generating slices of higher dimensional noise, unless you rotated the domain. There is also a company that wants to reserve it for thesmelves. I want to make sure everybody has access to speed-optimized gradient noise for whole-area generation, so I spent some time and came up with this instead.
+The first idea I thought of, was to simply iterate over skewed lattice coordinates. But that wouldn't have been very good for generating slices of higher dimensional noise, unless you rotated the domain. There is also a company that wants to reserve it for themselves. I want to make sure everybody has access to speed-optimized gradient noise for whole-area generation, so I spent some time and came up with this instead.
 
 ## Algorithm
 1. Define your image/buffer/array with a shape and size.
@@ -70,7 +70,7 @@ Seems great for large areas (1024x1024 - 8192x8192) and low relative frequencies
 * Apply it to value-noise of some sort.
 
 ## Philosophy
-This software is released under an open source license. With this license, you can use it for just about anything you want: independent projects, commercial projects, education, redistributable libraries, etc. That said, it is preferred that you not use it in the process of discovering and patenting computing ideas. Obviously, I cannot stop you from doing so. But I would invite you to consider the impact that computing idea patents ("software patents") have on the rest of the community.
+This software is released under an open source license. With this license, you can use it for just about anything: independent projects, commercial projects, education, redistributable libraries, etc. That said, it is preferred that you not use it in the process of discovering and patenting computing ideas. Obviously, I cannot stop you from doing so. But I would invite you to consider the impact that computing idea patents ("software patents") have on the rest of the community.
 
 Software patents prevent others from implementing an *idea* altogether, without conditions. This includes open source contributors, small game/software developers, and even educators. It includes anybody who arrives at an idea, independently or not. You don't necessarily need to be a classic "patent troll" for your software patent to create another obstacle in the avenue for creativity, and to inhibit progress as a whole.
 
