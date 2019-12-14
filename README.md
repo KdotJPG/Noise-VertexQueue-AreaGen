@@ -53,6 +53,11 @@ Seems great for large areas (1024x1024 - 8192x8192) and low relative frequencies
 ![Metrics 16x16, frequency 1/64](images/metrics_16_64.png)
 ![Metrics 16x16, frequency 1/8](images/metrics_16_8.png)
 
+### Versus FastNoise (Non-SIMD)
+
+![Metrics vs FastNoise Simplex 2D, 1024x1024, frequency 1/128](images/metrics_vs_fastnoise.png)
+![Metrics vs FastNoise Perlin 2D, 1024x1024, frequency 1/128](images/metrics_vs_fastnoise_perlin.png)
+
 ## Possible extensions and related ideas
 * Accept an amplitude scaling constant to better faciliate octave summation. The GenerateContext2D can bake this into the pre-generated kernel.
 * Support domain rotation and independent axis scaling (arbitrary linear transforms). This example only includes a single frequency scaling for both axes.
