@@ -7,13 +7,13 @@ The first idea I thought of, was to simply iterate over skewed lattice coordinat
 1. Define your image/buffer/array with a shape and size.
 2. Use the frequency scaling (+ any other transforms) to pre-generate the contribution kernel.
 3. Define the offset for the noise generation (e.g. if generating large tiles of an even larger world).
-4. Start at some point on the image. I chose to start on the lowest corner. Skew the point into noise lattice space (including transforms such as frequency scaling).
+4. Start at one point on the image. I chose to start on the lowest corner. Skew the point into noise lattice coordinate space (including transforms such as frequency scaling).
 5. Pick a nearby point/vertex on the skewed noise lattice. Add it to the queue and the "seen" set. The chosen point should either contribute directly to the image, or have at least one neighbor that does.
 6. While the queue is not empty, loop:
 	1. Pop off one point to process.
 	2. Loop over and add its contribution anywhere necessary, to the image/array/buffer.
 	3. For all of its defined "neighbors" (e.g. in 2D this could be the hexagon surrounding the point)
-		1. If that neighbor is within contribution range of the image/array/buffer, and is also not in the "seen" set, add it to the queue and set.
+		1. If that neighbor is within contribution distance of the image/array/buffer, and is also not in the "seen" set, add it to the queue and set.
 
 ## Usage
 
