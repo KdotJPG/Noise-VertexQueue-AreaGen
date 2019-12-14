@@ -1,14 +1,15 @@
-# Area Generation for Gradient Noise
+# Vertex Queue Area Generation for Gradient Noise
 Proof of concept. Generates gradient noise over a specified area (using a vertex queue and not a "range"), with the goal of increasing performance.
 
-The first idea I thought of, was to simply iterate over skewed lattice coordinates. But that wouldn't have been very good for generating slices of higher dimensional noise, unless you rotated the domain. There is also a company that wants to reserve it for thesmelves. I want to make sure everybody has access to speed-optimized gradient noise for whole-area generation, so I spent some time and came up with this idea instead.
+The first idea I thought of, was to simply iterate over skewed lattice coordinates. But that wouldn't have been very good for generating slices of higher dimensional noise, unless you rotated the domain. There is also a company that wants to reserve it for themselves. I want to make sure everybody has access to speed-optimized gradient noise for whole-area generation, so I spent some time and came up with this instead.
 
 ## Algorithm
-1. Define your image/buffer/array with a shape and size. Define your generation offset.
+1. Define your image/buffer/array with a shape and size.
 2. Use the frequency scaling (+ any other transforms) to pre-generate the contribution kernel.
-3. Start at some point on the image. I chose to start on the lowest corner. Skew the point into noise lattice space (including transforms such as frequency scaling).
-4. Pick a nearby point/vertex on the skewed noise lattice. Add it to the queue and the "seen" set. The chosen point should either contribute directly to the image, or have at least one neighbor that does.
-5. While the queue is not empty, loop:
+3. Define the offset for the noise generation (e.g. if generating large tiles of an even larger world).
+4. Start at some point on the image. I chose to start on the lowest corner. Skew the point into noise lattice space (including transforms such as frequency scaling).
+5. Pick a nearby point/vertex on the skewed noise lattice. Add it to the queue and the "seen" set. The chosen point should either contribute directly to the image, or have at least one neighbor that does.
+6. While the queue is not empty, loop:
 	1. Pop off one point to process.
 	2. Loop over and add its contribution anywhere necessary, to the image/array/buffer.
 	3. For all of its defined "neighbors" (e.g. in 2D this could be the hexagon surrounding the point)
@@ -45,7 +46,7 @@ Seems great for large areas (1024x1024 - 8192x8192) and low relative frequencies
 
 ![Metrics 8192x8192, frequency 1/1024](images/metrics_8192_1024.png)
 ![Metrics 8192x812, frequency 1/128](images/metrics_8192_128.png)
-![Metrics 1024x1024, frequency 1/128](images/(metrics_1024_128.png)
+![Metrics 1024x1024, frequency 1/128](images/metrics_1024_128.png)
 ![Metrics 64x64, frequency 1/512](images/metrics_64_512.png)
 ![Metrics 64x64, frequency 1/32](images/metrics_64_32.png)
 ![Metrics 32x32, frequency 1/16](images/metrics_32_16.png)
@@ -69,11 +70,11 @@ Seems great for large areas (1024x1024 - 8192x8192) and low relative frequencies
 * Apply it to value-noise of some sort.
 
 ## Philosophy
-This software is released under an open source license. With this license, you can use it for just about anything you want: independent projects, commercial projects, education, redistributable libraries, etc. That said, it is preferred that you not use it in the process of discovering and patenting computing ideas. Obviously, I cannot stop you from doing so. But I would invite you to consider the impact that computing idea patents ("software patents") have on the rest of the community.
+This software is released under an open source license. With this license, you can use it for just about anything: independent projects, commercial projects, education, redistributable libraries, etc. That said, it is preferred that you not use it in the process of discovering and patenting computing ideas. Obviously, I cannot stop you from doing so. But I would invite you to consider the impact that computing idea patents ("software patents") have on the rest of the community.
 
 Software patents prevent others from implementing an *idea* altogether, without conditions. This includes open source contributors, small game/software developers, and even educators. It includes anybody who arrives at an idea, independently or not. You don't necessarily need to be a classic "patent troll" for your software patent to create another obstacle in the avenue for creativity, and to inhibit progress as a whole.
 
-You don't need software patents to protect your code. Copyright accomplishes that. You can also keep your code closed-source, without using the patent system. Ask yourself if software patents are truly necessary for your business. I invite you to take a stand against them.
+You don't need software patents to protect your code. Copyright provides a lot of protection already. You can also keep your code closed-source, without using the patent system. Ask yourself if software patents are truly necessary for your business. I invite you to take a stand against them.
 
 * http://endsoftpatents.org/
 * http://en.swpat.org/wiki/Why_abolish_software_patents
