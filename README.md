@@ -46,7 +46,7 @@ Seems great for large areas (1024x1024 - 8192x8192) and low relative frequencies
 
 ![Metrics 8192x8192, frequency 1/1024](images/metrics_8192_1024.png)
 ![Metrics 8192x812, frequency 1/128](images/metrics_8192_128.png)
-![Metrics 1024x1024, frequency 1/128](images/(metrics_1024_128.png)
+![Metrics 1024x1024, frequency 1/128](images/metrics_1024_128.png)
 ![Metrics 64x64, frequency 1/512](images/metrics_64_512.png)
 ![Metrics 64x64, frequency 1/32](images/metrics_64_32.png)
 ![Metrics 32x32, frequency 1/16](images/metrics_32_16.png)
