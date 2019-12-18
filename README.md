@@ -64,6 +64,7 @@ Seems great for large areas (1024x1024 - 8192x8192) and low relative frequencies
 * If using octaves, associate each point from the higher frequencies with one (nearest?) point from the lowest frequency, and process them all together.
 * Write a 3D version (BCC or OpenSimplex)
 * Try it with the torus trick in 4D. This technique should work better for that than iterating over skewed lattice coordinates. Will probably require re-parameterizing the kernel function.
+* The above, but with various map projections such as geodesic dome tiles, cylindrical maps, etc. One could also define noise directly on a sphere, by determining a polyhedron (e.g. geodesic dome) whose vertices are assigned kernels not unlike the familiar ones, with gradients defined along whichever geometry is most practical. Though, vertex intransitivity may create visible artifacts.
 * Support differently-shaped and differently-laid-out destination images/arrays/buffers. Hex grids, triangular sections of images, etc.
 * This might not lend well to domain warping in general. However, if the amount of displacement is limited, then increasing the checked contribution radius by the maximum displacement should suffice.
 * Should work just fine on a regular hypercube grid (Old Perlin) if necessary.
