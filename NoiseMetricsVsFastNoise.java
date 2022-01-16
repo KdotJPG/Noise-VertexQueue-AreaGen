@@ -14,17 +14,17 @@ class NoiseMetricsVsFastNoise {
 	static final double NOISE_EVAL_PERIOD = 128.0;
 	static final int OFF_X = 8192;
 	static final int OFF_Y = 8192;
-	static final FastNoise.NoiseType fastNoiseType = FastNoise.NoiseType.Perlin;
+	static final FastNoise.NoiseType fastNoiseType = FastNoise.NoiseType.Simplex;
 	
 	static final double NOISE_EVAL_FREQ = 1.0 / NOISE_EVAL_PERIOD;
 	
 	public static void main(String[] args) {
 		
-		SuperSimplex2DAreaGen.GenerateContext2D ctx = new SuperSimplex2DAreaGen.GenerateContext2D(NOISE_EVAL_FREQ);
-		SuperSimplex2DAreaGen[] noises = new SuperSimplex2DAreaGen[N_INSTANCES];
+		OpenSimplex2S.GenerateContext2D ctx = new OpenSimplex2S.GenerateContext2D(OpenSimplex2S.LatticeOrientation2D.Standard, NOISE_EVAL_FREQ, NOISE_EVAL_FREQ, 1.0);
+		OpenSimplex2S[] noises = new OpenSimplex2S[N_INSTANCES];
 		FastNoise[] fastNoises = new FastNoise[N_INSTANCES];
 		for (int i = 0; i < N_INSTANCES; i++) {
-			noises[i] = new SuperSimplex2DAreaGen(i);
+			noises[i] = new OpenSimplex2S(i);
 			fastNoises[i] = new FastNoise(i);
 			fastNoises[i].SetNoiseType(fastNoiseType);
 			fastNoises[i].SetFrequency((float)NOISE_EVAL_FREQ);
@@ -45,7 +45,7 @@ class NoiseMetricsVsFastNoise {
 				long start = System.currentTimeMillis();
 				
 				// Generate area
-				noises[i].generate(ctx, buffer, OFF_X, OFF_Y);
+				noises[i].generate2(ctx, buffer, OFF_X, OFF_Y);
 				
 				long elapsed = System.currentTimeMillis() - start;
 				
@@ -72,7 +72,7 @@ class NoiseMetricsVsFastNoise {
 				// Generate traditionally
 				for (int y = 0; y < HEIGHT; y++) {
 					for (int x = 0; x < WIDTH; x++) {
-						buffer[y][x] = noises[i].eval((x + OFF_X) * NOISE_EVAL_FREQ, (y + OFF_Y) * NOISE_EVAL_FREQ);
+						buffer[y][x] = noises[i].noise2((x + OFF_X) * NOISE_EVAL_FREQ, (y + OFF_Y) * NOISE_EVAL_FREQ);
 					}
 				}
 				

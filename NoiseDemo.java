@@ -21,12 +21,12 @@ public class NoiseDemo
 			throws IOException {
 		
 		// Initialize
-		SuperSimplex2DAreaGen noise = new SuperSimplex2DAreaGen(0);
-		SuperSimplex2DAreaGen.GenerateContext2D noiseBulk = new SuperSimplex2DAreaGen.GenerateContext2D(1.0 / PERIOD);
+		OpenSimplex2S noise = new OpenSimplex2S(0);
+		OpenSimplex2S.GenerateContext2D noiseBulk = new OpenSimplex2S.GenerateContext2D(OpenSimplex2S.LatticeOrientation2D.Standard, 1.0 / PERIOD, 1.0 / PERIOD, 1.0);
 		
 		// Generate
 		double[][] buffer = new double[HEIGHT][WIDTH];
-		noise.generate(noiseBulk, buffer, OFF_X, OFF_Y);
+		noise.generate2(noiseBulk, buffer, OFF_X, OFF_Y);
 		
 		// Image
 		BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -36,7 +36,7 @@ public class NoiseDemo
 			{
 				double value = buffer[y][x]; if (value < -1) value = -1; if (value > 1) value = 1;
 				if (DEMONSTRATE_SUBTLE_DIFFERENCE) {
-					double oldValue = noise.eval((x + OFF_X) * 1.0 / PERIOD, (y + OFF_Y) * 1.0 / PERIOD);
+					double oldValue = noise.noise2((x + OFF_X) * 1.0 / PERIOD, (y + OFF_Y) * 1.0 / PERIOD);
 					value -= oldValue;
 				}
 				int rgb = 0x010101 * (int)((value + 1) * 127.5);
